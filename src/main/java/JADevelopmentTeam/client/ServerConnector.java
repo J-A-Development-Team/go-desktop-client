@@ -7,11 +7,11 @@ import java.net.ConnectException;
 import java.net.Socket;
 import java.sql.SQLOutput;
 
-public class ServerConnector {
-    ObjectOutputStream os;
-    ObjectInputStream is;
+class ServerConnector {
+    private static ObjectOutputStream os;
+    private static ObjectInputStream is;
     private static String host = "localhost";
-    private static int port = 58907;
+    private static int port = 4444;
     private static ServerConnector instance;
     private Socket socket;
     private ServerConnector(){
@@ -27,7 +27,7 @@ public class ServerConnector {
         }
     };
 
-    public static ServerConnector getInstance(){
+    static ServerConnector getInstance(){
         if (instance == null) {
             synchronized (ServerConnector.class) {
                 if (instance == null) {
@@ -38,4 +38,11 @@ public class ServerConnector {
         return instance;
     }
 
+    public static ObjectOutputStream getObjectOutputStream() {
+        return os;
+    }
+
+    public static ObjectInputStream getObjectInputStream() {
+        return is;
+    }
 }

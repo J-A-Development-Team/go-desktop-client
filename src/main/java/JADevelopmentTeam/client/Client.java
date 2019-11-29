@@ -1,8 +1,11 @@
 package JADevelopmentTeam.client;
 
 public class Client {
-    ServerConnector serverConnector;
+    private static ServerConnector  serverConnector;
 
     public static void main(String[] args) {
+        serverConnector = ServerConnector.getInstance();
     }
 }
+
+
