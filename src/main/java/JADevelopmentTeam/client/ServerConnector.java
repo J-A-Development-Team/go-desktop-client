@@ -24,7 +24,7 @@ class ServerConnector {
         } catch (ConnectException e) {
             System.out.println("Program nie połączył się z serwerem.\n" +
                     "Upewnij się, że serwer został uruchomiony");
-
+                    System.exit(-1);
         }catch (Exception e){
             System.out.println("Coś nie wyszło");
         }
@@ -41,8 +41,12 @@ class ServerConnector {
         return instance;
     }
 
-    public void sendData(DataPackage data) throws IOException {
-        os.writeObject(data);
+    public void sendData(DataPackage data) {
+        try {
+            os.writeObject(data);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     public DataPackage getData(DataPackage dataPackage) throws IOException, ClassNotFoundException {
         return (DataPackage) is.readObject();

@@ -1,6 +1,8 @@
 package JADevelopmentTeam.common;
 
-public class DataPackage {
+import java.io.Serializable;
+
+public class DataPackage implements Serializable {
     private Object data;
     private Info info;
     public enum Info {Stone,StoneTable,PlayerColor

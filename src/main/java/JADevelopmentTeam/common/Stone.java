@@ -1,6 +1,8 @@
 package JADevelopmentTeam.common;
 
-public class Stone {
+import java.io.Serializable;
+
+public class Stone implements Serializable {
     private int xCoordinate;
     private int yCoordinate;
     private boolean isBlack;
