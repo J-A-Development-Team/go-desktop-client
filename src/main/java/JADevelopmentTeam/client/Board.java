@@ -24,15 +24,15 @@ public class Board extends JPanel {
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setPaint(Color.BLACK);
-        float xMove = 0;
-        float yMove = 0;
-        float xStart = this.getWidth()/2.0f/size;
-        float yStart = this.getHeight()/2.0f/size;
+        double xMove = 0;
+        double yMove = 0;
+        double xStart = this.getWidth()/2.0f/size;
+        double yStart = this.getHeight()/2.0f/size;
         for (int i = 0; i < size; i++) {
             g2d.drawLine((int) (xMove+xStart), (int) yStart, (int) (xMove+xStart), (int) (this.getHeight()-yStart));
             g2d.drawLine((int) xStart, (int) (yMove+yStart), (int) (this.getWidth()-xStart), (int) (yMove+yStart));
-            xMove +=  (float) this.getWidth()/size;
-            yMove += (float) this.getHeight()/size;
+            xMove +=  (double) this.getWidth()/size;
+            yMove += (double) this.getHeight()/size;
         }
 //        g2d.drawLine(this.getWidth()/2,0,this.getWidth()/2,this.getHeight());
 //        g2d.drawLine(0,this.getHeight()/2,this.getWidth(),this.getHeight()/2);
