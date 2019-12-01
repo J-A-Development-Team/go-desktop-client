@@ -1,5 +1,7 @@
 package JADevelopmentTeam.client;
 
+import JADevelopmentTeam.common.DataPackage;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -22,10 +24,11 @@ class ServerConnector {
         } catch (ConnectException e) {
             System.out.println("Program nie połączył się z serwerem.\n" +
                     "Upewnij się, że serwer został uruchomiony");
+
         }catch (Exception e){
             System.out.println("Coś nie wyszło");
         }
-    };
+    }
 
     static ServerConnector getInstance(){
         if (instance == null) {
@@ -38,11 +41,10 @@ class ServerConnector {
         return instance;
     }
 
-    public static ObjectOutputStream getObjectOutputStream() {
-        return os;
+    public void sendData(DataPackage data) throws IOException {
+        os.writeObject(data);
     }
-
-    public static ObjectInputStream getObjectInputStream() {
-        return is;
+    public DataPackage getData(DataPackage dataPackage) throws IOException, ClassNotFoundException {
+        return (DataPackage) is.readObject();
     }
 }
