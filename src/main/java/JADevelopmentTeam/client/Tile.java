@@ -67,7 +67,7 @@ public class Tile extends JPanel {
         ServerConnector.getInstance();
         if (stone == null) {
             System.out.println("klikniete w puste x:"+xCoordinate+" y:"+yCoordinate);
-            //ServerConnector.getInstance().sendData(new DataPackage(new Stone(xCoordinate, yCoordinate), DataPackage.Info.Stone));
+            ServerConnector.getInstance().sendData(new DataPackage(new Stone(xCoordinate, yCoordinate), DataPackage.Info.Stone));
         } else {
             System.out.println("klikniete x:"+xCoordinate+" y:"+yCoordinate);
         }
