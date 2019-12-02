@@ -8,6 +8,7 @@ import java.io.ObjectOutputStream;
 import java.net.ConnectException;
 import java.net.Socket;
 import java.sql.SQLOutput;
+import java.util.Scanner;
 
 class ServerConnector {
     private static ObjectOutputStream os;
@@ -48,7 +49,10 @@ class ServerConnector {
             e.printStackTrace();
         }
     }
-    public DataPackage getData(DataPackage dataPackage) throws IOException, ClassNotFoundException {
+    public DataPackage getData() throws IOException, ClassNotFoundException {
         return (DataPackage) is.readObject();
+    }
+    public Scanner getInputAsScanner() throws IOException {
+        return new Scanner(socket.getInputStream());
     }
 }
