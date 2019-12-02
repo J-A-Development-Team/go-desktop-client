@@ -5,7 +5,6 @@ import JADevelopmentTeam.common.Stone;
 
 import javax.swing.*;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Client {
 
@@ -17,26 +16,27 @@ public class Client {
         frame.setVisible(true);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         ServerConnector serverConnector = ServerConnector.getInstance();
-        Scanner scanner = null;
-        try {
-            scanner = serverConnector.getInputAsScanner();
-        } catch (IOException e) {
-            System.exit(-1);
-        }
-        while (scanner.hasNextLine()) {
+        while (true) {
             try {
                 handleInput(serverConnector.getData(),board);
 
             } catch (IOException | ClassNotFoundException e) {
+                System.out.println(25);
                 System.exit(-1);
             }
         }
     }
 
     private static void handleInput(DataPackage dataPackage, Board board) {
-        switch (dataPackage.getInfo()) {
-            case StoneTable:
-                board.setStones((Stone[][]) dataPackage.getData());
+        System.out.println("Handle");
+        if (dataPackage.getInfo() == DataPackage.Info.StoneTable) {
+            board.setStones((Stone[][]) dataPackage.getData());
+            for (int i = 0; i < 9; i++) {
+                for (int j = 0; j < 9; j++) {
+                    System.out.println(board.getStones()[j][i].exist()+" "+j+" "+i);
+                }
+            }
+//                System.out.println(board.getStones()[0][0].getXCoordinate());
         }
     }
 }

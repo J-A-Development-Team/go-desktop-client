@@ -48,7 +48,7 @@ public class Tile extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        if (stone != null) {
+        if (stone.exist()) {
             g2d.setPaint(Color.BLACK);
            if (stone.isBlack()) {
                 g2d.setPaint(Color.BLACK);
@@ -65,7 +65,7 @@ public class Tile extends JPanel {
 
     private void sendData() {
         ServerConnector.getInstance();
-        if (stone == null) {
+        if (!stone.exist()) {
             System.out.println("klikniete w puste x:"+xCoordinate+" y:"+yCoordinate);
             ServerConnector.getInstance().sendData(new DataPackage(new Stone(xCoordinate, yCoordinate), DataPackage.Info.Stone));
         } else {

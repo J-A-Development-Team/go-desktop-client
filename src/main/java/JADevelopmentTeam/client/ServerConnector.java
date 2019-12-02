@@ -11,8 +11,8 @@ import java.sql.SQLOutput;
 import java.util.Scanner;
 
 class ServerConnector {
-    private static ObjectOutputStream os;
-    private static ObjectInputStream is;
+    private ObjectOutputStream os;
+    private ObjectInputStream is;
     private static String host = "localhost";
     private static int port = 4444;
     private static ServerConnector instance;
@@ -45,14 +45,13 @@ class ServerConnector {
     public void sendData(DataPackage data) {
         try {
             os.writeObject(data);
+            os.reset();
+            os.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     public DataPackage getData() throws IOException, ClassNotFoundException {
         return (DataPackage) is.readObject();
-    }
-    public Scanner getInputAsScanner() throws IOException {
-        return new Scanner(socket.getInputStream());
     }
 }
