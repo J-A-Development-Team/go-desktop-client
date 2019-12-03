@@ -28,6 +28,10 @@ public class Intersection implements Serializable {
         this.hasStone = hasStone;
     }
 
+    public boolean isHasStone() {
+        return hasStone;
+    }
+
     public int getXCoordinate() {
         return xCoordinate;
     }
