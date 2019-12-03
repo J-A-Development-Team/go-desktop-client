@@ -52,13 +52,14 @@ public class Board extends JPanel {
         this.stones = stones;
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                if (tiles[j][i] == null)
-                    tiles[j][i] = new Tile(null,j,i);
-                tiles[j][i].setStone(stones[j][i]);
-                tiles[j][i].repaint();
+                Stone old = tiles[j][i].getStone();
+                if (!(old.exist()==stones[j][i].exist() && old.isBlack() == stones[j][i].isBlack())) {
+                    tiles[j][i].setStone(stones[j][i]);
+                    tiles[j][i].repaint();
+                    this.repaint();
+                }
             }
         }
-        repaintTable();
     }
 
     public int getBoardSize() {
@@ -68,15 +69,4 @@ public class Board extends JPanel {
     public void setBoardSize(int size) {
         this.size = size;
     }
-
-    private void repaintTable() {
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                tiles[j][i].repaint();
-            }
-        }
-        repaint();
-    }
-
-
 }
