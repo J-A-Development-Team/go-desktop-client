@@ -1,25 +1,25 @@
 package JADevelopmentTeam.client;
 
-import JADevelopmentTeam.common.Stone;
+import JADevelopmentTeam.common.Intersection;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class Board extends JPanel {
-    private Stone[][] stones;
+    private Intersection[][] intersections;
     private Tile[][] tiles;
     private int size;
     private int space = 10;
 
     public Board(int size) {
         this.size = size;
-        stones = new Stone[size][size];
+        intersections = new Intersection[size][size];
         tiles = new Tile[size][size];
         this.setLayout(new GridLayout(size, size, space, space));
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                stones[j][i] = new Stone(j, i, false);
-                tiles[j][i] = new Tile(stones[j][i],j,i);
+                intersections[j][i] = new Intersection(j, i, false);
+                tiles[j][i] = new Tile(intersections[j][i],j,i);
                 this.add(tiles[j][i]);
             }
         }
@@ -44,17 +44,17 @@ public class Board extends JPanel {
         }
     }
 
-    public Stone[][] getStones() {
-        return stones;
+    public Intersection[][] getIntersections() {
+        return intersections;
     }
 
-    public void setStones(Stone[][] stones) {
-        this.stones = stones;
+    public void setIntersections(Intersection[][] intersections) {
+        this.intersections = intersections;
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                Stone old = tiles[j][i].getStone();
-                if (!(old.exist()==stones[j][i].exist() && old.isBlack() == stones[j][i].isBlack())) {
-                    tiles[j][i].setStone(stones[j][i]);
+                Intersection old = tiles[j][i].getIntersection();
+                if (!(old.exist()== intersections[j][i].exist() && old.isStoneBlack() == intersections[j][i].isStoneBlack())) {
+                    tiles[j][i].setIntersection(intersections[j][i]);
                     tiles[j][i].repaint();
                     this.repaint();
                 }

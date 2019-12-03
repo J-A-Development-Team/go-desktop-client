@@ -1,7 +1,7 @@
 package JADevelopmentTeam.client;
 
 import JADevelopmentTeam.common.DataPackage;
-import JADevelopmentTeam.common.Stone;
+import JADevelopmentTeam.common.Intersection;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,14 +10,14 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Ellipse2D;
 
 public class Tile extends JPanel {
-    private Stone stone;
+    private Intersection intersection;
     private int xCoordinate;
     private int yCoordinate;
 
-    public Tile(Stone stone, int xCoordinate, int yCoordinate) {
+    public Tile(Intersection intersection, int xCoordinate, int yCoordinate) {
         this.xCoordinate = xCoordinate;
         this.yCoordinate = yCoordinate;
-        this.stone = stone;
+        this.intersection = intersection;
         initialize();
     }
 
@@ -31,26 +31,26 @@ public class Tile extends JPanel {
         });
     }
 
-    public Stone getStone() {
-        return stone;
+    public Intersection getIntersection() {
+        return intersection;
     }
 
-    public void setStone(Stone stone) {
-        this.stone = stone;
+    public void setIntersection(Intersection intersection) {
+        this.intersection = intersection;
         repaint();
     }
 
     public void removeStone() {
-        this.stone = null;
+        this.intersection = null;
         repaint();
     }
 
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        if (stone.exist()) {
+        if (intersection.exist()) {
             g2d.setPaint(Color.BLACK);
-           if (stone.isBlack()) {
+           if (intersection.isStoneBlack()) {
                 g2d.setPaint(Color.BLACK);
             } else {
                 g2d.setPaint(Color.WHITE);
@@ -65,9 +65,9 @@ public class Tile extends JPanel {
 
     private void sendData() {
         ServerConnector.getInstance();
-        if (!stone.exist()) {
+        if (!intersection.exist()) {
             System.out.println("klikniete w puste x:"+xCoordinate+" y:"+yCoordinate);
-            ServerConnector.getInstance().sendData(new DataPackage(new Stone(xCoordinate, yCoordinate), DataPackage.Info.Stone));
+            ServerConnector.getInstance().sendData(new DataPackage(new Intersection(xCoordinate, yCoordinate), DataPackage.Info.Stone));
         } else {
             System.out.println("klikniete x:"+xCoordinate+" y:"+yCoordinate);
         }
