@@ -23,7 +23,6 @@ public class Tile extends JPanel {
     }
 
     private void initialize() {
-        this.setBorder(BorderFactory.createLineBorder(Color.BLUE));
         this.setOpaque(true);
         this.setLayout(new CardLayout());
         this.addMouseListener(new MouseAdapter() {
