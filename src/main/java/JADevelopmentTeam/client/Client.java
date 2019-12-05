@@ -4,12 +4,14 @@ import JADevelopmentTeam.common.DataPackage;
 import JADevelopmentTeam.common.Intersection;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 
 public class Client {
 
     public static void main(String[] args) {
         JFrame frame = new JFrame();
+        frame.setBackground(new Color(224,172,105));
         frame.setSize(400, 400);
         Board board = new Board(9);
         frame.add(board);
