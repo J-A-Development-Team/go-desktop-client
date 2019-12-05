@@ -3,6 +3,8 @@ package JADevelopmentTeam.client;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertNotNull;
 
 //Make sure that server works

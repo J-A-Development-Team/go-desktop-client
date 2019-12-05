@@ -14,8 +14,9 @@ public class Board extends JPanel {
     public Board(int size) {
         this.size = size;
         intersections = new Intersection[size][size];
+        this.setOpaque(true);
         tiles = new Tile[size][size];
-        this.setLayout(new GridLayout(size, size, space, space));
+        this.setLayout(new GridLayout(size, size));
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 intersections[j][i] = new Intersection(j, i, false);
@@ -60,6 +61,7 @@ public class Board extends JPanel {
                 }
             }
         }
+
     }
 
     public int getBoardSize() {
