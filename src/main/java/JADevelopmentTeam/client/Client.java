@@ -31,16 +31,24 @@ public class Client {
 
     private static void handleInput(DataPackage dataPackage, Board board,JFrame frame) {
         System.out.println("Handle");
-        if (dataPackage.getInfo() == DataPackage.Info.StoneTable) {
-            board.setIntersections((Intersection[][]) dataPackage.getData());
-            for (int i = 0; i < 9; i++) {
-                for (int j = 0; j < 9; j++) {
-                    System.out.println(board.getIntersections()[j][i].exist()+" "+j+" "+i);
+        switch (dataPackage.getInfo()) {
+            case StoneTable: {
+                board.setIntersections((Intersection[][]) dataPackage.getData());
+                for (int i = 0; i < 9; i++) {
+                    for (int j = 0; j < 9; j++) {
+                        System.out.println(board.getIntersections()[j][i].exist() + " " + j + " " + i);
+                    }
                 }
+                break;
             }
-            frame.repaint();
-//                System.out.println(board.getStones()[0][0].getXCoordinate());
+            case Info:
+                JOptionPane.showMessageDialog(frame,(String) dataPackage.getData(),"WARNING",JOptionPane.ERROR_MESSAGE);
+                break;
+            case Turn:
+                frame.setTitle((String) dataPackage.getData());
+                break;
         }
+        frame.repaint();
     }
 }
 
