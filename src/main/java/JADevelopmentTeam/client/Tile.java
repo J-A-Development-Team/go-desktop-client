@@ -65,7 +65,6 @@ public class Tile extends JPanel {
             g2d.fill(ellipse);
             g2d.setPaint(Color.BLACK);
             g2d.draw(ellipse);
-            System.out.println(this.getHeight());
         }
     }
 
