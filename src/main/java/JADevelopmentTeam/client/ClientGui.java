@@ -29,7 +29,7 @@ public class ClientGui extends JFrame {
         System.out.println("Handle");
         switch (dataPackage.getInfo()) {
             case StoneTable: {
-                board.setIntersections((Intersection[][]) dataPackage.getData());
+                board.setIntersections((Intersection[][]) dataPackage.getData(),this);
                 for (int i = 0; i < 9; i++) {
                     for (int j = 0; j < 9; j++) {
                         System.out.println(board.getIntersections()[j][i].exist() + " " + j + " " + i);

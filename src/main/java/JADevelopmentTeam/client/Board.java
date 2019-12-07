@@ -49,7 +49,7 @@ public class Board extends JPanel {
         return intersections;
     }
 
-    public void setIntersections(Intersection[][] intersections) {
+    public void setIntersections(Intersection[][] intersections,ClientGui clientGui) {
         this.intersections = intersections;
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
@@ -58,6 +58,7 @@ public class Board extends JPanel {
                     tiles[j][i].setIntersection(intersections[j][i]);
                     tiles[j][i].repaint();
                     this.repaint();
+                    clientGui.repaint();
                 }
             }
         }
