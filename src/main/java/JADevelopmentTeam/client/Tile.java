@@ -76,9 +76,9 @@ public class Tile extends JPanel {
 
     private void sendData() {
         ServerConnector.getInstance();
+        ServerConnector.getInstance().sendData(new DataPackage(new Intersection(xCoordinate, yCoordinate), DataPackage.Info.Stone));
         if (!intersection.exist()) {
             System.out.println("klikniete w puste x:" + xCoordinate + " y:" + yCoordinate);
-            ServerConnector.getInstance().sendData(new DataPackage(new Intersection(xCoordinate, yCoordinate), DataPackage.Info.Stone));
         } else {
             System.out.println("klikniete x:" + xCoordinate + " y:" + yCoordinate);
         }
