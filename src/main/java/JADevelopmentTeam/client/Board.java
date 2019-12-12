@@ -20,7 +20,7 @@ public class Board extends JPanel {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 intersections[j][i] = new Intersection(j, i, false);
-                tiles[j][i] = new Tile(intersections[j][i],j,i);
+                tiles[j][i] = new Tile(intersections[j][i], j, i);
                 this.add(tiles[j][i]);
             }
         }
@@ -49,12 +49,14 @@ public class Board extends JPanel {
         return intersections;
     }
 
-    public void setIntersections(Intersection[][] intersections,ClientGui clientGui) {
+    public void setIntersections(Intersection[][] intersections, ClientGui clientGui) {
         this.intersections = intersections;
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 Intersection old = tiles[j][i].getIntersection();
-                if (!(old.exist()== intersections[j][i].exist() && old.isStoneBlack() == intersections[j][i].isStoneBlack())) {
+                if (!(old.exist() == intersections[j][i].exist() &&
+                        old.isStoneBlack() == intersections[j][i].isStoneBlack() &&
+                        old.isStoneDead() == intersections[j][i].isStoneDead())) {
                     tiles[j][i].setIntersection(intersections[j][i]);
                     tiles[j][i].repaint();
                     this.repaint();

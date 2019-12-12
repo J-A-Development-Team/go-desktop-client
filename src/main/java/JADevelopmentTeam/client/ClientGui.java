@@ -51,6 +51,7 @@ public class ClientGui extends JFrame {
                 JOptionPane.showMessageDialog(this, dataPackage.getData(), "WARNING", JOptionPane.ERROR_MESSAGE);
                 break;
             case Turn:
+                System.out.println("Ustawiam info na "+ (String) dataPackage.getData());
                 this.setTitle((String) dataPackage.getData());
                 break;
             case PlayerColor:
@@ -66,5 +67,6 @@ public class ClientGui extends JFrame {
                 }
                 passButton.setVisible(true);
         }
+        System.out.println(dataPackage.getInfo());
     }
 }
