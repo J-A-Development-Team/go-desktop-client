@@ -9,7 +9,8 @@ import java.awt.*;
 public class ClientGui extends JFrame {
     private Board board;
     private JMenuBar menuBar;
-    private JLabel label;
+    private JLabel colorLabel;
+    private JLabel yourPointsLabel;
     private JButton passButton;
 
     public ClientGui(int size) {
@@ -17,13 +18,17 @@ public class ClientGui extends JFrame {
         menuBar = new JMenuBar();
         menuBar.setBorderPainted(true);
         menuBar.setLayout(new BorderLayout());
-        label = new JLabel("Unknown color");
-        label.setOpaque(true);
+        colorLabel = new JLabel("Unknown color");
+
+        colorLabel.setOpaque(true);
+        yourPointsLabel = new JLabel("No Points yet");
+        yourPointsLabel.setOpaque(true);
         passButton = new JButton("PASS");
         passButton.setBackground(Color.RED);
         passButton.addActionListener(e -> ServerConnector.getInstance().sendData(new DataPackage("Pass", DataPackage.Info.Pass)));
-        menuBar.add(label,BorderLayout.LINE_START);
+        menuBar.add(colorLabel,BorderLayout.LINE_START);
         menuBar.add(passButton,BorderLayout.LINE_END);
+        menuBar.add(yourPointsLabel,BorderLayout.CENTER);
         passButton.setVisible(false);
         this.setJMenuBar(menuBar);
         this.setSize(500, 500);
@@ -57,15 +62,20 @@ public class ClientGui extends JFrame {
             case PlayerColor:
                 String color = (String) dataPackage.getData();
                 if (color.equals("black")) {
-                    label.setText("You are playing black stones");
-                    label.setForeground(Color.WHITE);
-                    label.setBackground(Color.BLACK);
+                    colorLabel.setText("You are playing black stones");
+                    colorLabel.setForeground(Color.WHITE);
+                    colorLabel.setBackground(Color.BLACK);
                 } else {
-                    label.setText("You are playing white stones");
-                    label.setForeground(Color.BLACK);
-                    label.setBackground(Color.WHITE);
+                    colorLabel.setText("You are playing white stones");
+                    colorLabel.setForeground(Color.BLACK);
+                    colorLabel.setBackground(Color.WHITE);
                 }
                 passButton.setVisible(true);
+                break;
+            case Points:
+                Integer pointsAsInt = (Integer) dataPackage.getData();
+                String points = pointsAsInt.toString();
+                yourPointsLabel.setText("Prisoners: "+points);
         }
         System.out.println(dataPackage.getInfo());
     }

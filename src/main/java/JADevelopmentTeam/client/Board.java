@@ -9,7 +9,6 @@ public class Board extends JPanel {
     private Intersection[][] intersections;
     private Tile[][] tiles;
     private int size;
-    private int space = 10;
 
     public Board(int size) {
         this.size = size;
