@@ -22,12 +22,13 @@ public class ClientGui extends JFrame {
 
         colorLabel.setOpaque(true);
         yourPointsLabel = new JLabel("No Points yet");
+        yourPointsLabel.setHorizontalAlignment(JLabel.CENTER);
         yourPointsLabel.setOpaque(true);
         passButton = new JButton("PASS");
         passButton.setBackground(Color.RED);
         passButton.addActionListener(e -> ServerConnector.getInstance().sendData(new DataPackage("Pass", DataPackage.Info.Pass)));
-        menuBar.add(colorLabel,BorderLayout.LINE_START);
-        menuBar.add(passButton,BorderLayout.LINE_END);
+        menuBar.add(colorLabel,BorderLayout.WEST);
+        menuBar.add(passButton,BorderLayout.EAST);
         menuBar.add(yourPointsLabel,BorderLayout.CENTER);
         passButton.setVisible(false);
         this.setJMenuBar(menuBar);
@@ -56,8 +57,10 @@ public class ClientGui extends JFrame {
                 JOptionPane.showMessageDialog(this, dataPackage.getData(), "WARNING", JOptionPane.ERROR_MESSAGE);
                 break;
             case Turn:
-                System.out.println("Ustawiam info na "+ (String) dataPackage.getData());
-                this.setTitle((String) dataPackage.getData());
+                String info = (String) dataPackage.getData();
+                this.setTitle(info);
+                if (info.equals("Remove Dead Stones"))
+                    board.eraseLastStoneInfo(this);
                 break;
             case PlayerColor:
                 String color = (String) dataPackage.getData();
@@ -76,6 +79,12 @@ public class ClientGui extends JFrame {
                 Integer pointsAsInt = (Integer) dataPackage.getData();
                 String points = pointsAsInt.toString();
                 yourPointsLabel.setText("Prisoners: "+points);
+                break;
+            case Stone:
+                board.setLastStone((Intersection) dataPackage.getData(),this);
+                break;
+            case Pass:
+                JOptionPane.showMessageDialog(this, dataPackage.getData(), "Opponent passed", JOptionPane.INFORMATION_MESSAGE);
         }
         System.out.println(dataPackage.getInfo());
     }

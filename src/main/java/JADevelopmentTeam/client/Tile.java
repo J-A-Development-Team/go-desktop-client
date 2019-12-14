@@ -13,6 +13,15 @@ public class Tile extends JPanel {
     private Intersection intersection;
     private int xCoordinate;
     private int yCoordinate;
+    private boolean isLast = false;
+
+    public boolean isLast() {
+        return isLast;
+    }
+
+    public void setLast(boolean last) {
+        isLast = last;
+    }
 
     public Tile(Intersection intersection, int xCoordinate, int yCoordinate) {
         this.xCoordinate = xCoordinate;
@@ -41,10 +50,6 @@ public class Tile extends JPanel {
         repaint();
     }
 
-    public void removeStone() {
-        this.intersection = null;
-        repaint();
-    }
 
     @Override
     public void paintComponent(Graphics g) {
@@ -70,7 +75,13 @@ public class Tile extends JPanel {
             g2d.setComposite(alphaComposite);
             g2d.fill(ellipse);
             g2d.setPaint(Color.BLACK);
+            if (isLast){
+                g2d.setStroke(new BasicStroke(4));
+                g2d.setPaint(Color.RED);
+                System.out.println("ostatni");
+            }
             g2d.draw(ellipse);
+
         }
     }
 

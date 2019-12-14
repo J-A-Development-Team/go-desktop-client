@@ -25,6 +25,39 @@ public class Board extends JPanel {
         }
     }
 
+    public void eraseLastStoneInfo(ClientGui clientGui) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (tiles[j][i].isLast()) {
+                    tiles[j][i].setLast(false);
+                    tiles[j][i].repaint();
+                    this.repaint();
+                    clientGui.repaint();
+                }
+            }
+        }
+    }
+
+    public void setLastStone(Intersection intersection, ClientGui clientGui) {
+        int x = intersection.getXCoordinate();
+        int y = intersection.getYCoordinate();
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (x == j && y == i) {
+                    tiles[j][i].setLast(true);
+                    tiles[j][i].repaint();
+                    this.repaint();
+                    clientGui.repaint();
+                } else if (tiles[j][i].isLast()) {
+                    tiles[j][i].setLast(false);
+                    tiles[j][i].repaint();
+                    this.repaint();
+                    clientGui.repaint();
+                }
+            }
+        }
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
@@ -38,9 +71,6 @@ public class Board extends JPanel {
             g2d.drawLine((int) xStart, (int) (yMove + yStart), (int) (this.getWidth() - xStart), (int) (yMove + yStart));
             xMove += (double) this.getWidth() / size;
             yMove += (double) this.getHeight() / size;
-            //            Funny
-//            g2d.drawLine((int) (this.getWidth()/size*i+xStart), (int) yStart, (int) (this.getWidth()/size*i+xStart), (int) (this.getHeight()-yStart));
-//            g2d.drawLine((int) xStart, (int) (this.getHeight()/size*i+yStart), (int) (this.getWidth()-xStart), (int) (this.getHeight()/size*i+yStart));
         }
     }
 
