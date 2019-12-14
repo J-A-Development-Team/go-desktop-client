@@ -54,7 +54,10 @@ public class ClientGui extends JFrame {
                 break;
             }
             case Info:
-                JOptionPane.showMessageDialog(this, dataPackage.getData(), "WARNING", JOptionPane.ERROR_MESSAGE);
+                String i = (String) dataPackage.getData();
+                JOptionPane.showMessageDialog(this, i, "WARNING", JOptionPane.ERROR_MESSAGE);
+                if (i.equals("Connection to opponent lost"))
+                    System.exit(0);
                 break;
             case Turn:
                 String info = (String) dataPackage.getData();

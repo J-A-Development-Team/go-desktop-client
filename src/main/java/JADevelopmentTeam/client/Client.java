@@ -1,4 +1,5 @@
 package JADevelopmentTeam.client;
+import javax.swing.*;
 import java.io.IOException;
 
 public class Client {
@@ -11,8 +12,8 @@ public class Client {
                 gui.handleInput(serverConnector.getData());
 
             } catch (IOException | ClassNotFoundException e) {
-                System.out.println(25);
-                System.exit(-1);
+                JOptionPane.showMessageDialog(gui, "Program will be shut down", "Connection with server lost", JOptionPane.ERROR_MESSAGE);
+                System.exit(0);
             }
         }
     }

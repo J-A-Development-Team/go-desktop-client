@@ -24,6 +24,7 @@ class ServerConnector {
         } catch (ConnectException e) {
             System.out.println("Program nie połączył się z serwerem.\n" +
                     "Upewnij się, że serwer został uruchomiony");
+
                     System.exit(-1);
         }catch (Exception e){
             System.out.println("Coś nie wyszło");
