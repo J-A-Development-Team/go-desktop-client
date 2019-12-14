@@ -7,8 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ConnectException;
 import java.net.Socket;
-import java.sql.SQLOutput;
-import java.util.Scanner;
+
 
 class ServerConnector {
     private ObjectOutputStream os;

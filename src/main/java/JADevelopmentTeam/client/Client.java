@@ -1,10 +1,4 @@
 package JADevelopmentTeam.client;
-
-import JADevelopmentTeam.common.DataPackage;
-import JADevelopmentTeam.common.Intersection;
-
-import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 
 public class Client {
