@@ -16,7 +16,7 @@ public class Tile extends JPanel {
     private int xCoordinate;
     private int yCoordinate;
     private boolean isLast = false;
-    private TerritoryStates territory = TerritoryStates.None;
+    private TerritoryStates territory;
 
     public TerritoryStates getTerritory() {
         return territory;
@@ -64,9 +64,9 @@ public class Tile extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
         int width = this.getWidth();
         int height = this.getHeight();
+        Graphics2D g2d = (Graphics2D) g;
         g2d.setBackground(new Color(224, 172, 105));
         if (intersection.exist()) {
             if (intersection.isStoneBlack()) {
@@ -94,39 +94,15 @@ public class Tile extends JPanel {
             }
             g2d.draw(ellipse);
         }
-        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
-        switch (territory) {
-            case Unknown:
-                g2d.setPaint(Color.RED);
-                break;
-            case None:
-                g2d.setPaint(Color.LIGHT_GRAY);
-                break;
-            case Verified:
-                g2d.setPaint(Color.GREEN);
-                break;
-            case ProbablyWhite:
-                g2d.setPaint(Color.CYAN);
-                break;
-            case White:
-                g2d.setPaint(Color.WHITE);
-                break;
-            case ProbablyBlack:
-                g2d.setPaint(Color.GRAY);
-                break;
-            case Black:
+        if (territory == TerritoryStates.BlackTerritory || territory == TerritoryStates.WhiteTerritory) {
+            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
+            if (territory == TerritoryStates.BlackTerritory) {
                 g2d.setPaint(Color.BLACK);
-                break;
-            case BlackTerritory:
-                g2d.setPaint(Color.BLACK);
-                break;
-            case WhiteTerritory:
+            } else {
                 g2d.setPaint(Color.WHITE);
-                break;
+            }
+            g2d.fill(new Rectangle2D.Double(width * 0.35, height * 0.35, width * 0.30, height * 0.30));
         }
-        g2d.fill(new Rectangle2D.Double(width * 0.25, height * 0.25, width * 0.50, height * 0.50));
-
-
     }
 
     private void sendData() {
