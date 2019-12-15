@@ -1,6 +1,7 @@
 package JADevelopmentTeam.client;
 
 import JADevelopmentTeam.common.Intersection;
+import JADevelopmentTeam.common.TerritoryStates;
 
 import javax.swing.*;
 import java.awt.*;
@@ -76,6 +77,19 @@ public class Board extends JPanel {
 
     public Intersection[][] getIntersections() {
         return intersections;
+    }
+
+    public void setTerritory(TerritoryStates[][] territory, ClientGui clientGui){
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (tiles[j][i].getTerritory()!=territory[j][i]){
+                    tiles[j][i].setTerritory(territory[j][i]);
+                    tiles[j][i].repaint();
+                    this.repaint();
+                    clientGui.repaint();
+                }
+            }
+        }
     }
 
     public void setIntersections(Intersection[][] intersections, ClientGui clientGui) {

@@ -2,6 +2,7 @@ package JADevelopmentTeam.client;
 
 import JADevelopmentTeam.common.DataPackage;
 import JADevelopmentTeam.common.Intersection;
+import JADevelopmentTeam.common.TerritoryStates;
 
 import javax.swing.*;
 import java.awt.*;
@@ -45,11 +46,6 @@ public class ClientGui extends JFrame {
         switch (dataPackage.getInfo()) {
             case StoneTable: {
                 board.setIntersections((Intersection[][]) dataPackage.getData(), this);
-                for (int i = 0; i < 9; i++) {
-                    for (int j = 0; j < 9; j++) {
-                        System.out.println(board.getIntersections()[j][i].exist() + " " + j + " " + i);
-                    }
-                }
                 this.repaint();
                 break;
             }
@@ -88,6 +84,9 @@ public class ClientGui extends JFrame {
                 break;
             case Pass:
                 JOptionPane.showMessageDialog(this, dataPackage.getData(), "Opponent passed", JOptionPane.INFORMATION_MESSAGE);
+                break;
+            case TerritoryTable:
+                board.setTerritory((TerritoryStates[][]) dataPackage.getData(),this);
         }
         System.out.println(dataPackage.getInfo());
     }
