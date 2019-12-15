@@ -8,14 +8,17 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ClientGui extends JFrame {
-    private Board board;
+
+    private static Board board;
     private JMenuBar menuBar;
     private JLabel colorLabel;
     private JLabel yourPointsLabel;
     private JButton passButton;
+    private static ClientGui clientGui;
 
     public ClientGui(int size) {
         super();
+        clientGui = this;
         menuBar = new JMenuBar();
         menuBar.setBorderPainted(true);
         menuBar.setLayout(new BorderLayout());
@@ -58,8 +61,11 @@ public class ClientGui extends JFrame {
             case Turn:
                 String info = (String) dataPackage.getData();
                 this.setTitle(info);
-                if (info.equals("Remove Dead Stones"))
+                Client.yourTurn = info.equals("Your turn");
+
+                if (info.equals("Remove Dead Stones")) {
                     board.eraseLastStoneInfo(this);
+                }
                 break;
             case PlayerColor:
                 String color = (String) dataPackage.getData();
@@ -67,10 +73,12 @@ public class ClientGui extends JFrame {
                     colorLabel.setText("You are playing black stones");
                     colorLabel.setForeground(Color.WHITE);
                     colorLabel.setBackground(Color.BLACK);
+                    Client.userIsBlack = true;
                 } else {
                     colorLabel.setText("You are playing white stones");
                     colorLabel.setForeground(Color.BLACK);
                     colorLabel.setBackground(Color.WHITE);
+                    Client.userIsBlack = false;
                 }
                 passButton.setVisible(true);
                 break;
@@ -89,5 +97,10 @@ public class ClientGui extends JFrame {
                 board.setTerritory((TerritoryStates[][]) dataPackage.getData(),this);
         }
         System.out.println(dataPackage.getInfo());
+    }
+
+    static void repaintBoardAndClientGui(){
+        board.repaint();
+        clientGui.repaint();
     }
 }

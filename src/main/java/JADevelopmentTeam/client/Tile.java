@@ -17,6 +17,7 @@ public class Tile extends JPanel {
     private int yCoordinate;
     private boolean isLast = false;
     private TerritoryStates territory;
+    private boolean isFocused;
 
     public TerritoryStates getTerritory() {
         return territory;
@@ -49,6 +50,22 @@ public class Tile extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 sendData();
             }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                if (Client.yourTurn) {
+                    isFocused = true;
+                    repaint();
+                    ClientGui.repaintBoardAndClientGui();
+                }
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                isFocused = false;
+                repaint();
+                ClientGui.repaintBoardAndClientGui();
+            }
         });
     }
 
@@ -67,6 +84,7 @@ public class Tile extends JPanel {
         int width = this.getWidth();
         int height = this.getHeight();
         Graphics2D g2d = (Graphics2D) g;
+        Ellipse2D.Double ellipse = new Ellipse2D.Double(width * 0.05, height * 0.05, width * 0.90, height * 0.90);
         g2d.setBackground(new Color(224, 172, 105));
         if (intersection.exist()) {
             if (intersection.isStoneBlack()) {
@@ -74,9 +92,6 @@ public class Tile extends JPanel {
             } else {
                 g2d.setPaint(Color.WHITE);
             }
-
-
-            Ellipse2D.Double ellipse = new Ellipse2D.Double(width * 0.05, height * 0.05, width * 0.90, height * 0.90);
             float alpha;
             if (intersection.isStoneDead()) {
                 alpha = 0.5f;
@@ -90,8 +105,17 @@ public class Tile extends JPanel {
             if (isLast) {
                 g2d.setStroke(new BasicStroke(4));
                 g2d.setPaint(Color.RED);
-                System.out.println("ostatni");
             }
+            g2d.draw(ellipse);
+        } else if (isFocused&&Client.yourTurn){
+            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+            if (Client.userIsBlack) {
+                g2d.setPaint(Color.BLACK);
+            }else {
+                g2d.setPaint(Color.WHITE);
+            }
+            g2d.fill(ellipse);
+            g2d.setPaint(Color.BLACK);
             g2d.draw(ellipse);
         }
         if (territory == TerritoryStates.BlackTerritory || territory == TerritoryStates.WhiteTerritory) {
@@ -103,6 +127,7 @@ public class Tile extends JPanel {
             }
             g2d.fill(new Rectangle2D.Double(width * 0.35, height * 0.35, width * 0.30, height * 0.30));
         }
+
     }
 
     private void sendData() {

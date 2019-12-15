@@ -3,7 +3,8 @@ import javax.swing.*;
 import java.io.IOException;
 
 public class Client {
-
+    public static boolean userIsBlack = false;
+    public static boolean yourTurn = false;
     public static void main(String[] args) {
         ServerConnector serverConnector = ServerConnector.getInstance();
         ClientGui gui = new ClientGui(9);
