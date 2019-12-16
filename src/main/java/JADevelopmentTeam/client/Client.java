@@ -7,7 +7,7 @@ public class Client {
     public static boolean yourTurn = false;
     public static void main(String[] args) {
         ServerConnector serverConnector = ServerConnector.getInstance();
-        ClientGui gui = new ClientGui(9);
+        ClientGui gui = new ClientGui();
         while (true) {
             try {
                 gui.handleInput(serverConnector.getData());
