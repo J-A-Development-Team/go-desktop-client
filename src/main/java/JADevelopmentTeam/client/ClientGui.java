@@ -16,7 +16,7 @@ public class ClientGui extends JFrame {
     private JButton passButton;
     private static ClientGui clientGui;
 
-    public ClientGui(int size) {
+    public ClientGui() {
         super();
         clientGui = this;
         menuBar = new JMenuBar();
@@ -37,6 +37,9 @@ public class ClientGui extends JFrame {
         passButton.setVisible(false);
         this.setJMenuBar(menuBar);
         this.setSize(500, 500);
+        int size = 9;
+        //ConfigurationScreen configurationScreen = new ConfigurationScreen();
+        //this.add(configurationScreen);
         board = new Board(size);
         this.add(board);
         this.setVisible(true);
