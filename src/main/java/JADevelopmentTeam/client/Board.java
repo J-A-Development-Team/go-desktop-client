@@ -62,17 +62,24 @@ public class Board extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
+
+        int xCorrection = (int) ((this.getWidth()-(tiles[0][0].getWidth()*size))/2.0);
+        int yCorrection= (int) ((this.getHeight()-(tiles[0][0].getHeight()*size))/2.0);
+        double tilesWidth = tiles[0][0].getWidth()*size;
+        double tilesHeight = tiles[0][0].getHeight()*size;
         g2d.setPaint(Color.BLACK);
         double xMove = 0;
         double yMove = 0;
-        double xStart = this.getWidth() / 2.0f / size;
-        double yStart = this.getHeight() / 2.0f / size;
-        for (int i = 0; i < size; i++) {
+        double xStart = this.getWidth() / 2.0f / size + xCorrection;
+        double yStart = this.getHeight() / 2.0f / size + yCorrection;
+        for (int i = 0; i < size-1; i++) {
             g2d.drawLine((int) (xMove + xStart), (int) yStart, (int) (xMove + xStart), (int) (this.getHeight() - yStart));
             g2d.drawLine((int) xStart, (int) (yMove + yStart), (int) (this.getWidth() - xStart), (int) (yMove + yStart));
-            xMove += (double) this.getWidth() / size;
-            yMove += (double) this.getHeight() / size;
+            xMove += (double) tiles[0][0].getWidth();
+            yMove += (double) tiles[0][0].getHeight();
         }
+        g2d.drawLine((int) (this.getWidth() - xStart), (int) yStart, (int) (this.getWidth() - xStart), (int) (this.getHeight() - yStart));
+        g2d.drawLine((int) xStart, (int) (this.getHeight() - yStart), (int) (this.getWidth() - xStart), (int) (this.getHeight() - yStart));
     }
 
     public Intersection[][] getIntersections() {

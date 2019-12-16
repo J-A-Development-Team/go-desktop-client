@@ -43,10 +43,8 @@ public class ClientGui extends JFrame {
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setBackground(new Color(224, 172, 105));
-        this.setLayout(new CardLayout());
 
     }
-
     public void handleInput(DataPackage dataPackage) {
         System.out.println("Handle");
         switch (dataPackage.getInfo()) {
