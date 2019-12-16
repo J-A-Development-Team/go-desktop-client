@@ -27,6 +27,7 @@ public class ConfigurationScreen extends JPanel {
         gameComboBox = new JComboBox<>();
         gameComboBox.addItem("19x19");
         gameComboBox.addItem("13x13");
+        gameComboBox.addItem("9x9");
         gameComboBox.addItem("5x5");
         JLabel infoBoxLabel = new JLabel("Choose game size  ");
         JLabel infoCheckBoxLabel = new JLabel("     Play with bot  ");
@@ -51,6 +52,9 @@ public class ConfigurationScreen extends JPanel {
                     break;
                 case "13x13":
                     boardSize = 13;
+                    break;
+                case "9x9":
+                    boardSize = 9;
                     break;
                 case "5x5":
                     boardSize = 5;
