@@ -31,6 +31,7 @@ public class ClientGui extends JFrame {
         yourPointsLabel.setOpaque(true);
         passButton = new JButton("PASS");
         passButton.setBackground(Color.RED);
+        passButton.setEnabled(false);
         passButton.addActionListener(e -> ServerConnector.getInstance().sendData(new DataPackage("Pass", DataPackage.Info.Pass)));
         menuBar.add(colorLabel,BorderLayout.WEST);
         menuBar.add(passButton,BorderLayout.EAST);
@@ -63,9 +64,18 @@ public class ClientGui extends JFrame {
                 String info = (String) dataPackage.getData();
                 this.setTitle(info);
                 Client.yourTurn = info.equals("Your turn");
-
-                if (info.equals("Remove Dead Stones")) {
+                if (info.equals("Your turn")){
+                    passButton.setEnabled(true);
+                    passButton.setBackground(Color.RED);
+                } else if (info.equals("Remove Dead Stones")) {
                     board.eraseLastStoneInfo(this);
+                    passButton.setText("Accept");
+                    passButton.setBackground(Color.GREEN);
+                    passButton.setEnabled(true);
+                    menuBar.repaint();
+                } else {
+                    passButton.setBackground(Color.GRAY);
+                    passButton.setEnabled(false);
                 }
                 break;
             case PlayerColor:
