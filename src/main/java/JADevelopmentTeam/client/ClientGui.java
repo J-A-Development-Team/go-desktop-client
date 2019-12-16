@@ -15,8 +15,9 @@ public class ClientGui extends JFrame {
     private JLabel yourPointsLabel;
     private JButton passButton;
     private static ClientGui clientGui;
+    private ConfigurationScreen configurationScreen;
 
-    public ClientGui() {
+    public ClientGui(int size) {
         super();
         clientGui = this;
         menuBar = new JMenuBar();
@@ -35,16 +36,15 @@ public class ClientGui extends JFrame {
         menuBar.add(passButton,BorderLayout.EAST);
         menuBar.add(yourPointsLabel,BorderLayout.CENTER);
         passButton.setVisible(false);
-        this.setJMenuBar(menuBar);
         this.setSize(500, 500);
-        int size = 9;
-        //ConfigurationScreen configurationScreen = new ConfigurationScreen();
-        //this.add(configurationScreen);
+        this.configurationScreen = new ConfigurationScreen(this);
+        this.add(configurationScreen);
         board = new Board(size);
-        this.add(board);
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setBackground(new Color(224, 172, 105));
+        this.setLayout(new CardLayout());
+
     }
 
     public void handleInput(DataPackage dataPackage) {
@@ -101,6 +101,15 @@ public class ClientGui extends JFrame {
         }
         System.out.println(dataPackage.getInfo());
     }
+    void exitConfiguration(int size){
+        board = new Board(size);
+        this.getContentPane().removeAll();
+        this.getContentPane().add(board);
+        this.setJMenuBar(menuBar);
+        this.revalidate();
+        repaintBoardAndClientGui();
+    }
+
 
     static void repaintBoardAndClientGui(){
         board.repaint();
