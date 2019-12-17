@@ -4,7 +4,6 @@ import JADevelopmentTeam.common.DataPackage;
 import JADevelopmentTeam.common.GameConfig;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicBorders;
 import java.awt.*;
 import java.util.Objects;
 
@@ -14,6 +13,7 @@ public class ConfigurationScreen extends JPanel {
 
     public ConfigurationScreen(ClientGui clientGui) {
         super();
+        this.setBackground(new Color(224, 172, 105));
         this.setLayout(new BorderLayout());
         JPanel north = new JPanel();
         JPanel south = new JPanel();
@@ -60,7 +60,7 @@ public class ConfigurationScreen extends JPanel {
                     boardSize = 5;
             }
             ServerConnector.getInstance().sendData(new DataPackage(new GameConfig(withBot.isSelected(),boardSize,false), DataPackage.Info.GameConfig));
-            clientGui.exitConfiguration(boardSize);
+            clientGui.startBoard(boardSize);
         });
         south.setLayout(new BorderLayout());
         south.add(start,BorderLayout.SOUTH);

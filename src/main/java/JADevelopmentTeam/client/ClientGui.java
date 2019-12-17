@@ -106,10 +106,14 @@ public class ClientGui extends JFrame {
                 break;
             case TerritoryTable:
                 board.setTerritory((TerritoryStates[][]) dataPackage.getData(),this);
+                break;
+            case GameResult:
+                JOptionPane.showMessageDialog(this,(String) dataPackage.getData(), "Game End", JOptionPane.INFORMATION_MESSAGE);
+                System.exit(0);
         }
         System.out.println(dataPackage.getInfo());
     }
-    void exitConfiguration(int size){
+    void startBoard(int size){
         board = new Board(size);
         this.getContentPane().removeAll();
         this.getContentPane().add(board);
