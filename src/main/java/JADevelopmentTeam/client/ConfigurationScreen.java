@@ -6,12 +6,13 @@ import JADevelopmentTeam.common.GameConfig;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
 
 public class ConfigurationScreen extends JPanel {
     private JComboBox<String> gameComboBox;
     private JCheckBox withBot;
-
+    URL url= ConfigurationScreen.class.getResource("/ManualPage/htpg.htm");
     public ConfigurationScreen(ClientGui clientGui) {
         super();
         this.setBackground(new Color(224, 172, 105));
@@ -67,9 +68,10 @@ public class ConfigurationScreen extends JPanel {
         jep.setEditable(false);
 
         try {
-            jep.setPage("https://www.kiseido.com/ff.htm");
+            jep.setPage(url);
         }
         catch (IOException d) {
+            d.printStackTrace();
             jep.setContentType("text/html");
             jep.setText("<html>Could not load webpage</html>");
         }
