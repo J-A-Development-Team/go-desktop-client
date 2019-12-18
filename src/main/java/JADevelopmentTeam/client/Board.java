@@ -7,8 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Board extends JPanel {
-    private Intersection[][] intersections;
-    private Tile[][] tiles;
+    Intersection[][] intersections;
+    Tile[][] tiles;
     private int size;
 
     public Board(int size) {
@@ -114,14 +114,5 @@ public class Board extends JPanel {
                 }
             }
         }
-
-    }
-
-    public int getBoardSize() {
-        return size;
-    }
-
-    public void setBoardSize(int size) {
-        this.size = size;
     }
 }
