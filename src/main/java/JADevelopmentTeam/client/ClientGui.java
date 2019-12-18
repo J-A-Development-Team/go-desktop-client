@@ -102,7 +102,7 @@ public class ClientGui extends JFrame {
                 board.setLastStone((Intersection) dataPackage.getData(),this);
                 break;
             case Pass:
-                JOptionPane.showMessageDialog(this, dataPackage.getData(), "Opponent passed", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, dataPackage.getData(), "Info", JOptionPane.INFORMATION_MESSAGE);
                 break;
             case TerritoryTable:
                 board.setTerritory((TerritoryStates[][]) dataPackage.getData(),this);
