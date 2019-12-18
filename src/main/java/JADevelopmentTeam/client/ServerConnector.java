@@ -12,7 +12,7 @@ import java.net.Socket;
 class ServerConnector {
     private ObjectOutputStream os;
     private ObjectInputStream is;
-    private static String host = "localhost";
+    private static String host = "25.82.175.66";
     private static int port = 4444;
     private static ServerConnector instance;
     private Socket socket;
