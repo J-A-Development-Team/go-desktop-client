@@ -37,7 +37,7 @@ public class ClientGui extends JFrame {
         menuBar.add(passButton,BorderLayout.EAST);
         menuBar.add(yourPointsLabel,BorderLayout.CENTER);
         passButton.setVisible(false);
-        this.setSize(500, 500);
+        this.setSize(960, 600);
         this.configurationScreen = new ConfigurationScreen(this);
         this.add(configurationScreen);
         board = new Board(size);
@@ -118,6 +118,7 @@ public class ClientGui extends JFrame {
         this.getContentPane().removeAll();
         this.getContentPane().add(board);
         this.setJMenuBar(menuBar);
+        this.setSize(500, 500);
         this.revalidate();
         repaintBoardAndClientGui();
     }
