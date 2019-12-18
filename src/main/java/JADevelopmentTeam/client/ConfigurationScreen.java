@@ -5,6 +5,7 @@ import JADevelopmentTeam.common.GameConfig;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.Objects;
 
 public class ConfigurationScreen extends JPanel {
@@ -62,6 +63,19 @@ public class ConfigurationScreen extends JPanel {
             ServerConnector.getInstance().sendData(new DataPackage(new GameConfig(withBot.isSelected(),boardSize,false), DataPackage.Info.GameConfig));
             clientGui.startBoard(boardSize);
         });
+        JEditorPane jep = new JEditorPane();
+        jep.setEditable(false);
+
+        try {
+            jep.setPage("https://www.kiseido.com/ff.htm");
+        }
+        catch (IOException d) {
+            jep.setContentType("text/html");
+            jep.setText("<html>Could not load webpage</html>");
+        }
+
+        JScrollPane scrollPane = new JScrollPane(jep);
+        this.add(scrollPane,BorderLayout.CENTER);
         south.setLayout(new BorderLayout());
         south.add(start,BorderLayout.SOUTH);
     }
